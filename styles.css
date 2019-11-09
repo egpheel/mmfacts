@@ -21,11 +21,11 @@ body {
 }
 
 .label {
-    font-size: 2vw;
+    font-size: 1.75em;
     color: rgba(255, 255, 255, 0.6)
 }
 
 .timer {
-    font-size: 2.5vw;
+    font-size: 2em;
     color: rgba(255, 255, 255, 0.7)
 }
