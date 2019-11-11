@@ -4,7 +4,21 @@ body {
     font-family: 'Lato', sans-serif;
     text-align: center;
     background: rgb(9,9,121);
-    background: linear-gradient(130deg, rgba(9,9,121,1) 0%, rgba(179,0,255,1) 100%);
+    background: linear-gradient(45deg, rgba(9,9,121,1), rgba(179,0,255,1), rgba(0, 183, 255, 1), rgba(190, 76, 76, 1));
+    background-size: 800% 100%;
+	animation: gradientBG 120s ease infinite;
+}
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }
 
 nav {
@@ -61,7 +75,7 @@ nav ul li a:hover {
     color: rgba(255, 255, 255, 0.6)
 }
 
-.timer {
+.timerText, .text {
     font-size: 2em;
     color: rgba(255, 255, 255, 0.7)
 }
