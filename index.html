@@ -28,6 +28,9 @@
                                 ]),
                                 m('li', [
                                     m(m.route.Link, { href: '/garrett' }, 'Garrett')
+                                ]),
+                                m('li', [
+                                    m(m.route.Link, { href: '/eduardo' }, 'Eduardo')
                                 ])
                             ])
                         ]),
@@ -53,6 +56,22 @@
             }
         }
 
+        var Eduardo = {
+            view: function () {
+                var date = new Date()
+                var now = date.getTime()
+                var startDate = new Date('2019-11-04 18:18')
+                var start = startDate.getTime()
+                var diff = now - start
+                var timer = setTimeout(m.redraw, 1000)
+
+                return [
+                    m('.label', 'Eduardo has been computerless for the past'),
+                    m(".timer", convertTimeFromMillisecondsToString(diff))
+                ]
+            }
+        }
+
         var Garrett = {
             view: function () {
                 return [
@@ -71,6 +90,11 @@
             '/garrett': {
                 render: function () {
                     return m(Layout, m(Garrett))
+                }
+            },
+            '/eduardo': {
+                render: function () {
+                    return m(Layout, m(Eduardo))
                 }
             }
         })
