@@ -8,35 +8,72 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://unpkg.com/mithril/mithril.min.js"></script>
 
-    <title>Rich's Curtains Uptime</title>
+    <title>Mason Motorsports Facts</title>
 </head>
 
 <body>
     <script>
         var root = document.body
+        var garrettsLapCount = 2043
 
-        var timer = setInterval(m.redraw, 1000)
-
-        var Time = {
+        var Layout = {
             view: function (vnode) {
-                var date = new Date()
-                var now = date.getTime()
-                var startDate = new Date('2019-11-09 15:00')
-                var start = startDate.getTime()
-                var diff = now - start
-
                 return [
                     m('.container', [
-                        m('.vertical-center', [
-                            m('.label', 'Rich\'s curtains have been up for the past'),
-                            m(".timer", convertTimeFromMillisecondsToString(diff))
-                        ])
+                        m('nav', [
+                            m('ul', [
+                                m('li', 'Mason Motorsports Facts'),
+                                m('li', [
+                                    m(m.route.Link, { href: '/rich' }, 'Rich')
+                                ]),
+                                m('li', [
+                                    m(m.route.Link, { href: '/garrett' }, 'Garrett')
+                                ])
+                            ])
+                        ]),
+                        m('.vertical-center', vnode.children)
                     ])
                 ]
             }
         }
 
-        m.mount(root, Time)
+        var Rich = {
+            view: function () {
+                var date = new Date()
+                var now = date.getTime()
+                var startDate = new Date('2019-11-09 15:00')
+                var start = startDate.getTime()
+                var diff = now - start
+                var timer = setTimeout(m.redraw, 1000)
+
+                return [
+                    m('.label', 'Rich\'s curtains have been up for the past'),
+                    m(".timer", convertTimeFromMillisecondsToString(diff))
+                ]
+            }
+        }
+
+        var Garrett = {
+            view: function () {
+                return [
+                    m('.label', [ 'Garrett\'s ', m('em', 'Throw \'n Go'), ' efforts have already amounted to' ]),
+                    m('.timer', numberWithCommas(garrettsLapCount) + ' laps')
+                ]
+            }
+        }
+
+        m.route(root, '/rich', {
+            '/rich': {
+                render: function () {
+                    return m(Layout, m(Rich))
+                }
+            },
+            '/garrett': {
+                render: function () {
+                    return m(Layout, m(Garrett))
+                }
+            }
+        })
 
         function convertTimeFromMillisecondsToString(from) {
             var seconds = Math.floor(from / 1000)
@@ -50,6 +87,10 @@
             var to = days + ((days == 1) ? " day, " : " days, ") + hours + ((hours == 1) ? " hour, " : " hours, ") + minutes + ((minutes == 1) ? " minute " : " minutes ") + "and " + seconds + ((seconds == 1) ? " second" : " seconds")
 
             return to
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     </script>
 </body>
