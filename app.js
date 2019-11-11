@@ -168,7 +168,7 @@ var root = document.body
             view: function(vnode) {
                 return [
                     m(NormalFact, {
-                        label: [ 'In order for him to survive, Jimmy has to sing ', m('em', 'Super Max') ],
+                        label: [ 'In order to survive, Jimmy has to sing ', m('em', 'Super Max') ],
                         text: '7 times per day'
                     })
                 ]
