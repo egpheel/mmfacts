@@ -1,5 +1,7 @@
 var root = document.body
-        var garrettsLapCount = 2043
+        var garrettsLapCount = 2115
+
+        var timer = null
 
         var Layout = {
             view: function (vnode) {
@@ -22,6 +24,12 @@ var root = document.body
                                 ]),
                                 m('li', [
                                     m(m.route.Link, { href: '/nick' }, 'Nick')
+                                ]),
+                                m('li', [
+                                    m(m.route.Link, { href: '/scott' }, 'Scott')
+                                ]),
+                                m('li', [
+                                    m(m.route.Link, { href: '/jimmy' }, 'Jimmy')
                                 ])
                             ])
                         ]),
@@ -33,6 +41,18 @@ var root = document.body
 
         var NormalFact = {
             view: function (vnode) {
+                if (vnode.attrs.needsTimer) {
+                    clearInterval(timer)
+                    timer = setInterval(m.redraw, 1000)
+                }
+
+                if (timer) {
+                    if (!vnode.attrs.needsTimer) {
+                        clearInterval(timer)
+                        timer = null
+                    }
+                }
+
                 return [
                     m('.label', vnode.attrs.label),
                     m('.text', vnode.attrs.text)
@@ -47,7 +67,10 @@ var root = document.body
                 var startDate = new Date(vnode.attrs.startDate)
                 var start = startDate.getTime()
                 var diff = now - start
-                var timer = setTimeout(m.redraw, 1000)
+
+                if (!timer) {
+                    timer = setInterval(m.redraw, 1000)
+                }
 
                 return [
                     m('.label', vnode.attrs.label),
@@ -109,6 +132,48 @@ var root = document.body
                 ]
             }
         }
+        
+        var d = new Date()
+        var n = d.getTime()
+        var scottStartDate = n
+        var randomStart = Math.floor(Math.random() * 30)
+        var maxSeconds = Math.floor(Math.random() * 60)
+
+        var Scott = {
+            view: function(vnode) {
+                var date = new Date()
+                var now = date.getTime()
+                var scottSeconds = Math.floor((now - scottStartDate)/1000) + randomStart
+
+                if (scottSeconds >= maxSeconds) {
+                    scottStartDate = now
+                    maxSeconds = Math.floor(Math.random() * 60)
+                    randomStart = -1
+                    if (scottSeconds < 0) {
+                        scottSeconds = 0
+                    }
+                }
+                
+                return [
+                    m(NormalFact, {
+                        label: [ 'Scott last called someone a ', m('em', 'cunting wankspanner') ],
+                        text: scottSeconds + (scottSeconds == 1 ? ' second ago' : ' seconds ago'),
+                        needsTimer: true
+                    })
+                ]
+            }
+        }
+
+        var Jimmy = {
+            view: function(vnode) {
+                return [
+                    m(NormalFact, {
+                        label: [ 'In order for him to survive, Jimmy has to sing ', m('em', 'Super Max') ],
+                        text: '7 times per day'
+                    })
+                ]
+            }
+        }
 
         m.route(root, '/rich', {
             '/rich': {
@@ -134,6 +199,16 @@ var root = document.body
             '/nick': {
                 render: function() {
                     return m(Layout, m(Nick))
+                }
+            },
+            '/scott': {
+                render: function() {
+                    return m(Layout, m(Scott))
+                }
+            },
+            '/jimmy': {
+                render: function() {
+                    return m(Layout, m(Jimmy))
                 }
             }
         })
