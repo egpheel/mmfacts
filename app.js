@@ -115,8 +115,8 @@ var root = document.body
                     //    text: numberWithCommas(garrettsLapCount) + ' laps'
                     //})
                     m(NormalFact, {
-                        label: [ 'Garrett has practiced roughly ', numberWithCommas(garrettsLapCount) + ' laps for', m('em', 'Skippy League') ],
-                        text: numberWithCommas(garrettsLapCount) + ' laps'
+                        label: [ 'Garrett\'s ', m('em', 'Skippy League'), ' efforts have already amounted to' ],
+                        text: numberWithCommas(garrettsLapCount) + ' laps in practice'
                     })
                 ]
             }
