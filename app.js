@@ -82,9 +82,12 @@ var root = document.body
         var Rich = {
             view: function(vnode) {
                 return [ 
-                    m(TimerToNowFact, {
-                        startDate: '2019-11-09 15:00',
-                        label: 'Rich\'s curtains have been up for the past',
+                    //m(TimerToNowFact, {
+                    //    startDate: '2019-11-09 15:00',
+                    //    label: 'Rich\'s curtains have been up for the past',
+                    //})
+                    m(NormalFact, {
+                        label: 'Rich\'s curtains aren\'t up anymore, OKAY!?'
                     })
                 ]
             }
