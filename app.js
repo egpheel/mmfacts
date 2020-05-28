@@ -1,5 +1,5 @@
 var root = document.body
-        var garrettsLapCount = 2115
+        var garrettsLapCount = 91802813
 
         var timer = null
 
@@ -96,9 +96,12 @@ var root = document.body
         var Eduardo = {
             view: function(vnode) {
                 return [
-                    m(TimerToNowFact, {
-                        startDate: '2019-11-04 18:17:36',
-                        label: 'Eduardo has been computerless for the past'
+                    //m(TimerToNowFact, {
+                    //    startDate: '2019-11-04 18:17:36',
+                    //    label: 'Eduardo has been computerless for the past'
+                    //})
+                    m(NormalFact, {
+                        label: 'Eduardo has a new PC that is almost old now, OKAY!?'
                     })
                 ]
             }
@@ -107,8 +110,12 @@ var root = document.body
         var Garrett = {
             view: function(vnode) {
                 return [
+                    //m(NormalFact, {
+                    //    label: [ 'Garrett\'s ', m('em', 'Throw \'n Go'), ' efforts have already amounted to' ],
+                    //    text: numberWithCommas(garrettsLapCount) + ' laps'
+                    //})
                     m(NormalFact, {
-                        label: [ 'Garrett\'s ', m('em', 'Throw \'n Go'), ' efforts have already amounted to' ],
+                        label: [ 'Garrett has practiced roughly ', numberWithCommas(garrettsLapCount) + ' laps for', m('em', 'Skippy League') ],
                         text: numberWithCommas(garrettsLapCount) + ' laps'
                     })
                 ]
